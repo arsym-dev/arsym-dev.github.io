@@ -1,0 +1,36 @@
+<div class="external-links">
+    {% if include.steam %}
+    <a href="{{ include.steam }}" target="_blank" rel="noopener noreferrer" class="external-link">
+        <img src="{{ '/assets/steam.svg' | relative_url }}" alt="Steam logo" class="link-logo">
+        Steam
+    </a>
+    {% endif %}
+
+    {% if include.itch %}
+    <a href="{{ include.itch }}" target="_blank" rel="noopener noreferrer" class="external-link">
+        <img src="{{ '/assets/itch_io.svg' | relative_url }}" alt="Itch.io logo" class="link-logo">
+        Itch.io
+    </a>
+    {% endif %}
+
+    {% if include.github %}
+    <a href="{{ include.github }}" target="_blank" rel="noopener noreferrer" class="external-link">
+        <img src="{{ '/assets/github.svg' | relative_url }}" alt="GitHub logo" class="link-logo">
+        GitHub
+    </a>
+    {% endif %}
+
+    {% if include.link %}
+    <a href="{{ include.link }}" target="_blank" rel="noopener noreferrer" class="external-link">
+        <img src="{{ '/assets/link.svg' | relative_url }}" alt="Link icon" class="link-logo">
+        {{ include.link_text | default: "External Link" }}
+    </a>
+    {% endif %}
+
+    {% if include.email %}
+    <a href="mailto:{{ include.email }}" target="_blank" rel="noopener noreferrer" class="external-link">
+        <img src="{{ '/assets/email.svg' | relative_url }}" alt="Email logo" class="link-logo">
+        Email
+    </a>
+    {% endif %}
+</div>

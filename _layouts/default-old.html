@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/style.css' | relative_url }}">
+</head>
+
+<body>
+
+    <div class="hamburger-menu" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="overlay" id="overlay"></div>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h1>{{ site.author.name | default: "Author Name" }}</h1>
+                <p>{{ site.author.email | default: "email@example.com" }}</p>
+                <button id="theme-toggle" class="theme-switcher" />
+            </div>
+            <nav>
+                <ul class="nav-list">
+                    <li>
+                        <a href="{{ '/' | relative_url }}">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ '/renpy/' | relative_url }}">
+                            Ren'Py Projects
+                        </a>
+                    <li>
+                        <a href="{{ '/attributions/' | relative_url }}">
+                            Attributions
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            {{ content }}
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburger = document.getElementById('hamburger');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const themeToggle = document.getElementById('theme-toggle');
+            const body = document.body;
+
+            function toggleMenu() {
+                sidebar.classList.toggle('is-open');
+                overlay.classList.toggle('is-open');
+            }
+
+            hamburger.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+
+            // Function to set the theme
+            function setTheme(theme) {
+                if (theme === 'dark') {
+                    body.setAttribute('data-theme', 'dark');
+                } else {
+                    body.removeAttribute('data-theme');
+                }
+                localStorage.setItem('theme', theme);
+            }
+
+            // Theme toggle logic
+            themeToggle.addEventListener('click', function () {
+                let currentTheme = body.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+                let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                setTheme(newTheme);
+            });
+
+            // Apply theme on page load
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme) {
+                setTheme(savedTheme);
+            } else if (prefersDark) {
+                setTheme('dark');
+            }
+        });
+    </script>
+
+</body>
+
+</html>

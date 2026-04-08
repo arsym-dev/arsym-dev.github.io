@@ -1,0 +1,87 @@
+{% comment %}
+Steam-like Carousel Include
+
+Usage:
+{% include steam_carousel.html number=0 %}
+
+Requires front matter like this:
+carousels:
+- images:
+- thumbnail: /path/to/thumb1.jpg
+main: /path/to/main1.jpg
+- thumbnail: /path/to/thumb2.jpg
+main: /path/to/main2.webm
+poster: /path/to/poster2.jpg # Optional poster for videos
+- ...
+{% endcomment %}
+
+{% assign carousel_index = include.number | default: -1 %}
+{% assign carousel_id = "steam-carousel-" | append: carousel_index %}
+{% assign carousel_data = page.carousels[carousel_index] %}
+
+<div id="{{ carousel_id }}" class="steam-carousel" {% if include.duration %}data-duration="{{ include.duration }}" {%
+    endif %}>
+    <div class="sc-main-view">
+        <div class="sc-video-overlay" style="display: none;">
+            <div class="sc-play-button"></div>
+            <span>Click to Play</span>
+        </div>
+        {% for item in carousel_data.images %}
+        {% assign media_url = item.main %}
+        {% assign is_youtube = false %}
+        {% assign youtube_id = "" %}
+        {% assign youtube_embed_url = "" %}
+        {% if media_url contains "youtu.be/" or media_url contains "youtube.com/watch?v=" or media_url contains
+        "youtube.com/embed/" %}
+        {% assign is_youtube = true %}
+        {% if media_url contains "youtu.be/" %}
+        {% assign youtube_id = media_url | split: "youtu.be/" | last | split: "?" | first | split: "&" | first %}
+        {% elsif media_url contains "youtube.com/watch?v=" %}
+        {% assign youtube_id = media_url | split: "watch?v=" | last | split: "&" | first %}
+        {% elsif media_url contains "youtube.com/embed/" %}
+        {% assign youtube_id = media_url | split: "youtube.com/embed/" | last | split: "?" | first | split: "&" | first
+        %}
+        {% endif %}
+        {% assign youtube_embed_url = "https://www.youtube.com/embed/" | append: youtube_id | append:
+        "?rel=0&modestbranding=1&playsinline=1" %}
+        {% endif %}
+        {% if forloop.first %}
+        {% if is_youtube %}
+        <iframe class="sc-media-item sc-media-item--iframe active" src="{{ youtube_embed_url }}"
+            title="YouTube video player" loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        {% elsif media_url contains ".webm" or media_url contains ".mp4" %}
+        <video class="sc-media-item active" src="{{ media_url }}" poster="{{ item.poster }}" playsinline muted autoplay
+            controls></video>
+        {% else %}
+        <img class="sc-media-item active" src="{{ media_url }}" alt="Carousel image" />
+        {% endif %}
+        {% else %}
+        {% if is_youtube %}
+        <iframe class="sc-media-item sc-media-item--iframe" data-src="{{ youtube_embed_url }}"
+            title="YouTube video player" loading="lazy"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        {% elsif media_url contains ".webm" or media_url contains ".mp4" %}
+        <video class="sc-media-item" data-src="{{ media_url }}" poster="{{ item.poster }}" playsinline muted
+            controls></video>
+        {% else %}
+        <img class="sc-media-item" data-src="{{ media_url }}" alt="Carousel image" />
+        {% endif %}
+        {% endif %}
+        {% endfor %}
+    </div>
+    <div class="sc-thumbnail-strip-wrapper">
+        <div class="sc-thumbnail-strip">
+            {% for item in carousel_data.images %}
+            <img class="sc-thumbnail {% if forloop.first %}active{% endif %}" src="{{ item.thumbnail }}"
+                data-index="{{ forloop.index0 }}" alt="Thumbnail {{ forloop.index }}">
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% if carousel_index == 0 %}
+<script src="/assets/js/steam_carousel.js" defer></script>
+{% endif %}

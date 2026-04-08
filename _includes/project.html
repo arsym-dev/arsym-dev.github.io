@@ -1,0 +1,72 @@
+<section class="project-entry"{% if include.anchor %} id="{{include.anchor}}"{% endif %}>
+<h2>{{include.title}}</h2>
+
+{% if include.genre or include.engine or include.platforms or include.languages or include.year or include.links or include.notes %}
+<div class="project-overview">
+    <div class="right-column">
+        <table>
+            {% if include.genre %}
+            <tr>
+                <th>Genre</th>
+                <td>{{include.genre}}</td>
+            </tr>
+            {% endif %}
+            {% if include.engine %}
+            <tr>
+                <th>Engine</th>
+                <td>{{include.engine}}</td>
+            </tr>
+            {% endif %}
+            {% if include.platforms %}
+            <tr>
+                <th>Platforms</th>
+                <td>{{include.platforms}}</td>
+            </tr>
+            {% endif %}
+            {% if include.languages %}
+            <tr>
+                <th>Languages</th>
+                <td>{{include.languages}}</td>
+            </tr>
+            {% endif %}
+            {% if include.year %}
+            <tr>
+                <th>Year</th>
+                <td>{{include.year}}</td>
+            </tr>
+            {% endif %}
+            {% if include.links %}
+            <tr>
+                <th>Links</th>
+                <td>{{include.links}}</td>
+            </tr>
+            {% endif %}
+            {% if include.notes %}
+            <tr>
+                <th>Notes</th>
+                <td>{{include.notes}}</td>
+            </tr>
+            {% endif %}
+
+        </table>
+    </div>
+    {% if include.number != nil %}
+    <div class="left-column">
+        {% include steam_carousel.html duration="5" number=include.number %}
+    </div>
+    {% endif %}
+</div>
+{% endif %}
+
+{% if include.role %}
+<h4>{{ include.role_heading | default: "Roles and Responsibilities" }}</h4>
+{{include.role | markdownify }}
+{% endif %}
+
+{% if include.outcomes %}
+<h4>{{ include.outcomes_heading | default: "Outcome"  }}</h4>
+{{include.outcomes | markdownify }}
+{% endif %}
+
+<!-- <div class="spacer"></div> -->
+</section>
