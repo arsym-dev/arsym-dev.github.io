@@ -17,8 +17,8 @@ duration: 1
   <h1>Build faster with automated workflows</h1>
   <p class="hero-copy">I design practical automation systems and scalable tooling that shorten prototype loops, improve reliability, and add production value without removing the human element.</p>
   <div class="hero-actions">
-    <a class="button-link button-link--primary" href="{{ '/automation/' | relative_url }}">View automation case studies</a>
-    <a class="button-link button-link--primary" href="{{ '/projects/' | relative_url }}">Browse game projects</a>
+    <a class="button-link button-link--primary" href="{{ '/automation' | relative_url }}">View automation case studies</a>
+    <a class="button-link button-link--primary" href="{{ '/projects' | relative_url }}">Browse game projects</a>
     {% if site.email and site.email != "your-email@example.com" %}
     <a class="button-link" href="mailto:{{ site.email }}">Contact</a>
     {% endif %}
@@ -54,13 +54,13 @@ duration: 1
     <p class="eyebrow">Automation page</p>
     <h3>Case studies built for consulting conversations</h3>
     <p>See the automation-focused work in a client-readable format: problem, workflow, impact, and how it supports production.</p>
-    <a class="text-link" href="{{ '/automation/' | relative_url }}">Open automation page</a>
+    <a class="text-link" href="{{ '/automation' | relative_url }}">Open automation page</a>
   </article>
   <article class="spotlight-card">
     <p class="eyebrow">Projects page</p>
     <h3>Game projects with tooling depth</h3>
     <p>Browse shipped and in-progress work across Ren'Py and Unity, including tools, porting, analytics, and quality-of-life systems.</p>
-    <a class="text-link" href="{{ '/projects/' | relative_url }}">Open game projects page</a>
+    <a class="text-link" href="{{ '/projects' | relative_url }}">Open game projects page</a>
   </article>
 </section>
 

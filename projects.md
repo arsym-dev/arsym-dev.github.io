@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Projects
+permalink: /projects
 
 carousels:
   - images:
@@ -64,7 +65,7 @@ carousels:
   <p>Beyond the listed projects, I have created 2D puzzle, 3D puzzle, adventure games, RPGs, and deckbuilders. In all cases, I strive to create memorable player experiences.</p>
   <div class="hero-actions">
     <a class="button-link button-link--primary" href="{{ '/' | relative_url }}">Home</a>
-    <a class="button-link button-link--primary" href="{{ '/automation/' | relative_url }}">Automation</a>
+    <a class="button-link button-link--primary" href="{{ '/automation' | relative_url }}">Automation</a>
     {% if site.email and site.email != "your-email@example.com" %}
     <a class="button-link" href="mailto:{{ site.email }}">Contact</a>
     {% endif %}

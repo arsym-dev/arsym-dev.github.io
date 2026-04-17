@@ -1,6 +1,7 @@
 ---
 layout: page
 title: Attributions
+permalink: /attributions
 ---
 
 ### Licensed under Attribution CC BY

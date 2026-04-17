@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Automation
+permalink: /automation
 ---
 
 <section class="page-intro hero hero--automation">
